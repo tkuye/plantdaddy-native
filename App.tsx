@@ -7,10 +7,20 @@ import Login from "./components/Login";
 import Devices from "./components/Devices";
 import NewDevice from './components/NewDevice';
 import State from "./components/State";
+import { useFonts } from 'expo-font';
+import FullDevice from './components/FullDevice';
+import Device from './components/Device';
+import BackArrow from './components/BackArrow';
+
 const Stack = createNativeStackNavigator();
 
 
 export default function App() {
+  const [loaded] = useFonts({
+    Montserrat: require('./assets/fonts/Montserrat-Medium.ttf'),
+  });
+
+  if (!loaded) return null;
   return (
     
     <NavigationContainer >
@@ -32,8 +42,18 @@ export default function App() {
         name="devices"
         component={Devices}/>
         <Stack.Screen
+        name="device"
+        component={Device}/>
+        <Stack.Screen
         name="new-device"
         component={NewDevice}/>
+        <Stack.Screen
+        component={BackArrow}
+        name="back-arrow"/>
+        <Stack.Screen
+        name="full-device"
+        component={FullDevice}/>
+        
       </Stack.Navigator>
     </NavigationContainer>
     

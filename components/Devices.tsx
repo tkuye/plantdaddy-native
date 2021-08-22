@@ -1,10 +1,11 @@
 import React, {useState, useEffect } from 'react';
-import {Text, TouchableOpacity, Image, FlatList} from 'react-native';
+import {Text, TouchableNativeFeedback, TouchableOpacity, Image, FlatList, Button, View, ListRenderItem} from 'react-native';
 import { styles } from './Styles';
 import axios from './Axios';
-import { getData } from './Extras';
+import { getData, storeData} from './Extras';
 import Device from "./Device"
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 const Devices =  (props:any) => {
 
 	const [devices, setDevices] = useState(false)
@@ -26,10 +27,11 @@ const Devices =  (props:any) => {
 				setRefreshing(false)
 			}
 			else {
-
+				setRefreshing(false)
 			}
 		}).catch(error => {
 			console.log(error)
+			setRefreshing(false)
 		})
 	}
 	}
@@ -38,23 +40,36 @@ const Devices =  (props:any) => {
 	useEffect(() => {
 		fetchData()
 	}, [])
+	
+	const logOut = () => {
+		storeData("username", null)
+		storeData("password", null)
+		props.navigation.navigate("login")
+	}
+
+	const renderItem:ListRenderItem<any> = ({item}) => (
+			<Device item={item} navigation={props.navigation}/>
+	);
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text style={styles.baseText}>
+			<Text style={styles.deviceText}>
 				My Devices
 			</Text>
 			{!devices ? <Text style={styles.noDevices}>You don't have any devices yet. Press the button to add one now!</Text>: null}
 			<FlatList
 			data={data}
-			renderItem={Device}
-			keyExtractor={(item, index) => index.toString()}
+			renderItem={renderItem}
+			keyExtractor={(_, index) => index.toString()}
 			onRefresh={() => fetchData()}
 			refreshing={refreshing}/>
 			<TouchableOpacity style={styles.deviceTouch} onPress={() => props.navigation.navigate("new-device")}> 
 				<Image source={require('../assets/icons/plus_button.png')} style={styles.plusButton}/>
 			</TouchableOpacity>
-			
+			<View style={styles.logout}>
+			<Button title="Logout" onPress={() => logOut()} />
+			</View>
+				
 		</SafeAreaView>
 	)
 }	

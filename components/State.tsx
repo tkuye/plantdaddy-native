@@ -3,15 +3,13 @@ import {View} from 'react-native'
 import {getData} from "./Extras"
 import axios from "./Axios"
 import {styles} from "./Styles"
-import { useFonts } from 'expo-font';
+
 interface StateProps {
 navigation: any
 }
 
 const State: React.FC<StateProps> = ({navigation}) => {
-	const [loaded] = useFonts({
-    Montserrat: require('../assets/fonts/Montserrat-Medium.ttf'),
-  });
+	
 
 
 	useEffect(() => {

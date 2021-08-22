@@ -1,10 +1,10 @@
 import React, {useState, useEffect } from 'react';
-import {View, Text } from 'react-native'
+import {View, Text, TouchableOpacity } from 'react-native'
 import { styles } from './Styles';
 import { formatDate } from './Extras';
 export interface IDevice {
 	item: {deviceName: string
-	deviceId: string
+	deviceID: string
 	deviceData: {
 		humidity: number
 		light: number
@@ -14,14 +14,13 @@ export interface IDevice {
 	},
 	
 }
-index: number,
-separators: any
+navigation: any
 }
 
-const Device: React.FC<IDevice> = ({item, index, separators}) => {
+const Device: React.FC<IDevice> = ({item, navigation}) => {
 
 	return (
-		<View style={styles.device}>
+		<TouchableOpacity style={styles.device} onPress={() => navigation.navigate("full-device", {item})}>
 			<Text style={styles.deviceName}>
 				{item.deviceName}
 			</Text>
@@ -34,7 +33,7 @@ const Device: React.FC<IDevice> = ({item, index, separators}) => {
 			<View>
 				<Text style={styles.deviceDate}>Last Updated: {"\n"}{new Date(item?.deviceData?.timestamp).toLocaleString()}</Text>
 			</View>
-		</View>
+		</TouchableOpacity>
 	)
 }
 

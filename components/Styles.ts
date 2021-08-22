@@ -8,6 +8,11 @@ export const styles = StyleSheet.create({
 
 	},
 
+	backArrow: {
+		marginTop: 50,
+
+	},
+
 	errors: {
 		color: "red",
 		textAlign: "center",
@@ -17,6 +22,10 @@ export const styles = StyleSheet.create({
 
 	alreadyText: {
 		padding: 10
+	},
+	logout:{
+			alignItems: 'flex-start',
+		 padding: 20
 	},
 
 	device: {
@@ -31,6 +40,40 @@ export const styles = StyleSheet.create({
 		shadowOpacity: 0.4,
 		backgroundColor: "white",
 		shadowOffset: {width: 0, height: -8},
+	},
+
+	topHead: {
+		borderBottomColor: "#ccc",
+		borderBottomWidth: 3,
+		padding: 15,
+	},
+
+	latestDeviceData: {
+		justifyContent: "center",
+		alignItems:"center",
+		fontSize: 19,
+		padding: 15,
+		width: "100%",
+		textAlign: "center",
+		borderBottomColor: "#ccc",
+		borderBottomWidth: 3,
+		shadowOpacity: 0.9,
+		shadowOffset: {width: 0, height:0},
+		shadowColor: "#000",
+		backgroundColor: "white",
+		
+	},
+	fullDate: {
+		fontSize: 23, 
+		textAlign: "center",
+		fontFamily: "Montserrat",
+		padding:10,
+	},
+
+	lateHead: {
+		fontSize: 32,
+		fontFamily: "Montserrat",
+		paddingBottom: 10, 
 	},
 	deviceName: {
 		fontFamily: "Montserrat",
@@ -51,6 +94,12 @@ export const styles = StyleSheet.create({
 	devicePoints: {
 		fontFamily: "Montserrat",
 		fontSize: 19,
+		
+	},
+	fullDevicePoints: {
+		fontFamily: "Montserrat",
+		fontSize: 19,
+		textAlign: "center",
 	},
 
 	deviceDate: {
@@ -88,7 +137,13 @@ export const styles = StyleSheet.create({
 	},
 
 	baseText: {
-		paddingTop: 100,
+		paddingTop: 30,
+		fontFamily: "Montserrat",
+		fontSize: 50,
+		textAlign: "center",
+	},
+	deviceText: {
+		paddingTop: 20,
 		fontFamily: "Montserrat",
 		fontSize: 50,
 		textAlign: "center",
@@ -113,10 +168,33 @@ export const styles = StyleSheet.create({
 		fontFamily: "Montserrat",
 
 	},
+picker: {
+	width: "95%",
+	alignSelf: "center",
+	marginTop: 15,
+	borderColor: "#ccc"
+},
+	headText: {
+		height: 50,
+		borderWidth: 1,
+		margin: 10,
+		marginTop: 80,
+		padding: 10,
+		fontSize: 18,
+		color: "black",
+		borderColor: "#ccc",
+		backgroundColor: "white",
+		borderRadius: 10,
+		borderTopWidth: 3,
+		borderTopColor: "#ddd",
+		borderTopEndRadius: 20,
+		fontFamily: "Montserrat",
+	},
 	container: {
     flex: 1,
     backgroundColor: '#fff',
 	width: "100%",
+	padding: 15,
   },
 	descHeaders: {
 		fontSize: 20,
@@ -124,6 +202,14 @@ export const styles = StyleSheet.create({
 		paddingBottom: 1,
 		fontFamily: "Montserrat",
 		
+	},
+
+	graphHeaders: {
+		fontSize: 20,
+		margin: 10,
+		paddingBottom: 1,
+		fontFamily: "Montserrat",
+		textAlign: "center",
 	},
 
 	button: {
