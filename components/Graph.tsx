@@ -4,7 +4,10 @@ import {View, Dimensions, Text } from 'react-native'
 import axios from "./Axios"
 import { styles } from './Styles';
 
-
+/** 
+ * The Daily Line Chart component which is responsible for diplaying all the graphable data the device has collected.
+ * 
+*/
 const DataChart = (props:any) => {
     const chartConfig = {
         backgroundGradientFrom: "#888",
@@ -34,26 +37,30 @@ const DataChart = (props:any) => {
             for (let key of labels){
                 points.push(res.data[key][props.dropdownValue])
             }
-            if (labels.length > 0){
-            setData({
-                labels: labels,
-                datasets:[
-                    {
-                        data: points,
-                        color: (opacity = 1) => {
-                            switch (props.dropdownValue){ 
-                                case "soilMoisture": return `rgba(0, 143, 76, ${opacity})`
-                                case "temperature": return `rgba(199, 0, 57, ${opacity})`
-                                case "humidity": return `rgba(31, 116, 242, ${opacity})`
-                                case "light": return `rgba(240, 151, 17, ${opacity})`
-                
-                            }
-                        },
-                        strokeWidth: 2
-                    }
-                ],
-                legend: [props.dropdownValue]
-            })
+            if (props.dropdownValue === null || props.deviceID === null || props.timePeriod === null){
+                setData(null)
+            }
+            else if (labels.length > 0){
+                let d = {
+                    labels: labels,
+                    datasets:[
+                        {
+                            data: points,
+                            color: (opacity = 1) => {
+                                switch (props.dropdownValue){ 
+                                    case "soilMoisture": return `rgba(0, 143, 76, ${opacity})`
+                                    case "temperature": return `rgba(199, 0, 57, ${opacity})`
+                                    case "humidity": return `rgba(31, 116, 242, ${opacity})`
+                                    case "light": return `rgba(240, 151, 17, ${opacity})`
+                    
+                                }
+                            },
+                            strokeWidth: 2
+                        }
+                    ],
+                    legend: [props.dropdownValue]
+                }
+            setData(d)
         } else {
             setData(null)
         }
@@ -65,15 +72,15 @@ const DataChart = (props:any) => {
     return (
         <View>
             {
-            data !== null? <LineChart data={data}
+            data !== null? <View><LineChart data={data}
             width={width}
             height={300}
             chartConfig={chartConfig}
             bezier
             yAxisSuffix={
-                props.dropdownValue === "temperature"?"\u2103":"%" }
+                props.dropdownValue === "temperature"?" \u2103":" %" }
             
-            />:<Text style={styles.graphHeaders}>There is no data available to display.</Text>}
+            /><Text style={styles.graphXLabel}>Hours in the Day</Text></View>:<Text style={styles.graphHeaders}>There is no data available to display.</Text>}
         </View>
     )
 }

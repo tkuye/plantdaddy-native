@@ -6,7 +6,14 @@ import { styles } from './Styles';
 import axios from "./Axios"
 import { getData, storeData } from './Extras';
 
-const SignUp = (props: any) => {
+
+/**
+ * This function enables the ablitty for users
+ * to login to the app with a seamless interface.
+ * @param props navigation
+ * @returns 
+ */
+const Login = (props: any) => {
 
 
 
@@ -19,7 +26,7 @@ const SignUp = (props: any) => {
 	const sendData = () => {
 
 		axios.post("/login", {
-			username: username,
+			username: username.toLowerCase(),
 			password: password
 		}).then(response => {
 			if (response.status === 200) {
@@ -44,7 +51,7 @@ const SignUp = (props: any) => {
 				Login{"\n"}
 			</Text>
 			<Text style={styles.descHeaders}> 
-				Username
+				Username or Email
 			</Text>
 			<TextInput style={styles.inputText}
 				placeholder="username"
@@ -79,5 +86,5 @@ const SignUp = (props: any) => {
 	)
 }
 
-export default SignUp
+export default Login
 

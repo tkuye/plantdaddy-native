@@ -10,7 +10,7 @@ import State from "./components/State";
 import { useFonts } from 'expo-font';
 import FullDevice from './components/FullDevice';
 import Device from './components/Device';
-import BackArrow from './components/BackArrow';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -47,9 +47,6 @@ export default function App() {
         <Stack.Screen
         name="new-device"
         component={NewDevice}/>
-        <Stack.Screen
-        component={BackArrow}
-        name="back-arrow"/>
         <Stack.Screen
         name="full-device"
         component={FullDevice}/>

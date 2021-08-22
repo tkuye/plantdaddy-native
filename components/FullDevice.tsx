@@ -1,15 +1,21 @@
 import React, {useEffect, useState} from "react";
 import CalendarPicker from "react-native-calendar-picker"
-import {View, ScrollView, Text, TextInput, Button} from "react-native"
+import {View, ScrollView, Text, TextInput, Button, RefreshControl, TouchableOpacity} from "react-native"
+import DropDownPicker from 'react-native-dropdown-picker';
+import { SafeAreaView } from "react-native-safe-area-context";
 import { IDevice } from "./Device";
 import { styles } from "./Styles";
 import axios from "./Axios"
 import Graph from "./Graph";
 import Svg,{G, Path} from "react-native-svg";
-import {TouchableOpacity} from "react-native";
-import DropDownPicker from 'react-native-dropdown-picker';
-import { SafeAreaView } from "react-native-safe-area-context";
 
+/**
+ * This function displays all the essential information about a given device.
+ * It allows to edit the name of the device, delete the device, 
+ * View the latest data and additionally view the daily data as a graph over a given day.
+ * @param props route, navigation
+ * @returns 
+ */
 const FullDevice = (props:any) => {
     const [item, setItem] = useState<IDevice["item"]>()
     const [editHead, seteditHead] = useState(false);
@@ -23,7 +29,20 @@ const FullDevice = (props:any) => {
       {label: 'Humidity', value: 'humidity'},
         {label: "Soil Moisture", value:"soilMoisture"}, 
         {label:"Light Level", value:"light"}])
+    const [refresh, setFresh] = useState(false);
 
+
+    const getDevice = () => {
+        axios.get("/get-device", {params: {
+            deviceID:props.route.params.item.deviceID
+        }}).then((response) => {
+            console.log(response.data);
+            setItem(response.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+    
     useEffect(() => {
         setItem(props.route.params.item)
         setHeader(props.route.params.item.deviceName)
@@ -57,8 +76,13 @@ const FullDevice = (props:any) => {
         setDate(date)
     }
     return (
-        <SafeAreaView>
-        <ScrollView nestedScrollEnabled={true}>
+        <SafeAreaView >
+        <ScrollView nestedScrollEnabled={true} 
+        refreshControl={
+            <RefreshControl
+              refreshing={refresh}
+              onRefresh={getDevice}/>}
+        >
             <View style={styles.topHead}>
             <TouchableOpacity style={styles.backArrow}  onPress={() => props.navigation.navigate("devices")}> 
                 <Svg
@@ -95,6 +119,7 @@ const FullDevice = (props:any) => {
                 <Text style={styles.graphHeaders}>
                     Select a date to see the averaged device data for that day.
                 </Text>
+                {/* This calendar is needed to pick the date associated with the the device data you wish to see.*/}
                 <CalendarPicker 
                 onDateChange={onDateChange}
                 />
@@ -113,7 +138,6 @@ const FullDevice = (props:any) => {
                 <Graph timePeriod={date? date.toISOString().substring(0, 10): "2020-03-01"} deviceID={item?.deviceID} dropdownValue={value}/>
             </View>
             <Button title="Delete Device" onPress={deleteDevice}/>
-        
         </ScrollView>
         </SafeAreaView>
     )

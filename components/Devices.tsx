@@ -5,7 +5,14 @@ import axios from './Axios';
 import { getData, storeData} from './Extras';
 import Device from "./Device"
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+/**
+ * This component is responsible for diplaying all the devices 
+ * associated with a given user to the screen.
+ * Each device also shows the latest data that has been collected by the device
+ * for easy use.
+ * @param props navigation
+ * @returns 
+ */
 const Devices =  (props:any) => {
 
 	const [devices, setDevices] = useState(false)
@@ -63,7 +70,7 @@ const Devices =  (props:any) => {
 			keyExtractor={(_, index) => index.toString()}
 			onRefresh={() => fetchData()}
 			refreshing={refreshing}/>
-			<TouchableOpacity style={styles.deviceTouch} onPress={() => props.navigation.navigate("new-device")}> 
+			<TouchableOpacity style={styles.deviceTouch} onPress={() => props.navigation.navigate("new-device")} > 
 				<Image source={require('../assets/icons/plus_button.png')} style={styles.plusButton}/>
 			</TouchableOpacity>
 			<View style={styles.logout}>

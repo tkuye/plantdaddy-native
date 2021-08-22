@@ -8,6 +8,12 @@ interface StateProps {
 navigation: any
 }
 
+/**
+ * The State component to determing whether a user is logged in or not.
+ * If not, it will direct them to the signuo component.
+ * @param param0 -navigation
+ * @returns 
+ */
 const State: React.FC<StateProps> = ({navigation}) => {
 	
 

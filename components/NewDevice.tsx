@@ -8,12 +8,35 @@ import {getData} from "./Extras"
 interface NewDeviceProps {
 navigation: any
 }
-
+/**
+ * Component associated with the creation of a new device.
+ */
 const NewDevice: React.FC<NewDeviceProps> = (props) => {
 	const [name, setName] = useState("")
 	const [id, setId] = useState("")
+	let [errors, setErrors] = useState<string[]>([])
 
+	const checkErrors = () => {
+		setErrors([])
+		let errCount = 0
+		if (name === ""){
+			setErrors(array => [...array, "Device name cannot be empty."])
+			errCount++;
+		}
+		if (id === ""){
+			setErrors(array => [...array, "Device id cannot be empty"])
+			errCount++;
+		}
+
+		return errCount === 0
+	}
 	const sendData = () => {
+		
+
+		if (!checkErrors()) {
+			return
+		}
+
 		getData("username").then((data) => {
 			axios.post("/new-device",{
 			deviceName: name,
@@ -64,7 +87,10 @@ const NewDevice: React.FC<NewDeviceProps> = (props) => {
 				<Text style={styles.buttonText}>
 					Submit
 				</Text>
+				
 			</TouchableOpacity>
+			{errors.map(err => 
+					<Text key={errors.indexOf(err)} style={styles.errors}>{err}</Text>)}
 			</KeyboardAwareScrollView>
 		);
 }

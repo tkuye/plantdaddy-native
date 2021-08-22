@@ -1,11 +1,13 @@
 import {StyleSheet} from 'react-native'
 import { Platform } from 'react-native'
+
+
+/**
+ * This class is used for all styling needed within the app.
+ */
 export const styles = StyleSheet.create({
 	btnPress: {
 		backgroundColor: "#026440"
-	},
-	btnNormal: {
-
 	},
 
 	backArrow: {
@@ -133,7 +135,10 @@ export const styles = StyleSheet.create({
 	},
 
 	deviceTouch: {
-		alignItems: "center"
+		alignItems: "center",
+		paddingTop: 25,
+		
+		marginBottom: -25,
 	},
 
 	baseText: {
@@ -158,7 +163,6 @@ export const styles = StyleSheet.create({
 		margin: 10,
 		padding: 10,
 		fontSize: 18,
-
 		color: "black",
 		borderColor: "#ccc",
 		borderRadius: 10,
@@ -204,12 +208,21 @@ picker: {
 		
 	},
 
+
+	graphXLabel: {
+		fontFamily: "Montserrat",
+		fontSize: 16, 
+		marginTop: -25,
+		textAlign: "center",
+		marginBottom: 30,
+	},
 	graphHeaders: {
 		fontSize: 20,
 		margin: 10,
 		paddingBottom: 1,
 		fontFamily: "Montserrat",
 		textAlign: "center",
+
 	},
 
 	button: {

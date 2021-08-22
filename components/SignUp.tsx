@@ -5,14 +5,20 @@ import {Text, TouchableOpacity, TouchableHighlight} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { styles } from './Styles';
 import axios from "./Axios"
-import {storeData} from "./Extras"
+import {storeData, validateEmail} from "./Extras"
 
+/**
+ * This component implements a sign up page where users can begin to create their account.
+ * @param props navigation
+ * @returns 
+ */
 const SignUp = (props: any) => {
 
 
 const [username, setUsername] = useState("")
 const [password, setPassword] = useState("")
 const [password2, setPassword2] = useState("")
+const [email, setEmail] = useState("")
 const [error, setError] = useState("")
   
   
@@ -44,15 +50,26 @@ const [error, setError] = useState("")
 			return null
 		}
 
+
 		if (username === "") {
 			setError("Username must not be empty.")
 			return
 		}
 
+		if (!validateEmail(email)){
+			setError("Invalid Email address.")
+			return
+		}
+
+		if (email === "") {
+			setError("Email must not be empty.")
+			return
+		}
 		
 		axios.post("/new-user", {
-			username: username,
-			password: password
+			username: username.toLowerCase(),
+			password: password,
+			email: email.toLowerCase(),
 		}).then((response:any )=> {
 			if (response.status === 200) {
 				// Store data and leave the view.
@@ -63,7 +80,6 @@ const [error, setError] = useState("")
 					return
 				}
 				
-
 				storeData("username", username)
 				storeData("password", password)
 				props.navigation.navigate("devices")
@@ -87,6 +103,14 @@ const [error, setError] = useState("")
 			<Text style={styles.baseText}>
 				Create an Account{"\n"}
 			</Text>
+			<Text style={styles.descHeaders}> 
+				Email
+			</Text>
+			<TextInput style={styles.inputText}
+				placeholder="hello@plantdaddy.com"
+				textContentType="emailAddress"
+				value={email}
+				onChangeText={(text)=> setEmail(text)}/>
 			<Text style={styles.descHeaders}> 
 				Username
 			</Text>
