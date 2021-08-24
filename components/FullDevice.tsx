@@ -124,6 +124,9 @@ const FullDevice = (props:any) => {
                 
                 <Graph timePeriod={date? date.toISOString().substring(0, 10): "2020-03-01"} deviceID={item?.deviceID} dropdownValue={value}/>
             </View>
+            <View>
+                <Button title="Change Wifi Settings" onPress={() => props.navigation.navigate("bluetooth", {fullDevice:true}) }/>
+            </View>
             <Button title="Delete Device" onPress={deleteDevice}/>
         </ScrollView>
         </SafeAreaView>

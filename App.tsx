@@ -11,9 +11,8 @@ import { useFonts } from 'expo-font';
 import FullDevice from './components/FullDevice';
 import Device from './components/Device';
 import BlueTooth from "./components/Bluetooth";
-
+import SameDevice from "./components/SameDevice";
 const Stack = createNativeStackNavigator();
-
 
 export default function App() {
   const [loaded] = useFonts({
@@ -52,7 +51,8 @@ export default function App() {
         component={FullDevice}/>
         <Stack.Screen name="bluetooth"
         component={BlueTooth}/>
-        
+      <Stack.Screen name="same-device"
+      component={SameDevice}/>
       </Stack.Navigator>
     </NavigationContainer>
     

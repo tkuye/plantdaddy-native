@@ -48,6 +48,8 @@ const Devices =  (props:any) => {
 		fetchData()
 	}, [])
 	
+
+
 	const logOut = () => {
 		storeData("username", null)
 		storeData("password", null)
@@ -70,7 +72,7 @@ const Devices =  (props:any) => {
 			keyExtractor={(_, index) => index.toString()}
 			onRefresh={() => fetchData()}
 			refreshing={refreshing}/>
-			<TouchableOpacity style={styles.deviceTouch} onPress={() => props.navigation.navigate("bluetooth")} > 
+			<TouchableOpacity style={styles.deviceTouch} onPress={() => props.navigation.navigate("bluetooth", {fullDevice:false})} > 
 				<Image source={require('../assets/icons/plus_button.png')} style={styles.plusButton}/>
 			</TouchableOpacity>
 			<View style={styles.logout}>

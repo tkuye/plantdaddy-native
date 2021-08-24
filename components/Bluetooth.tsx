@@ -105,9 +105,14 @@ const BlueTooth = (props:any) => {
               peripheral,
               info: services
             }
+            
+            if (props.route.params.fullDevice){
+              props.navigation.navigate("same-device", {periData})
+            } else {
+              props.navigation.navigate("new-device", {periData})
+            }
 
-            props.navigation.navigate("new-device", {periData})
-
+            
           })
         })
 
