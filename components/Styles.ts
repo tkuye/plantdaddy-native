@@ -11,8 +11,9 @@ export const styles = StyleSheet.create({
 	},
 
 	backArrow: {
-		marginTop: 50,
-
+		marginBottom: 30,
+		marginTop: 20,
+		marginLeft: 10
 	},
 
 	errors: {

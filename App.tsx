@@ -10,7 +10,7 @@ import State from "./components/State";
 import { useFonts } from 'expo-font';
 import FullDevice from './components/FullDevice';
 import Device from './components/Device';
-
+import BlueTooth from "./components/Bluetooth";
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +50,8 @@ export default function App() {
         <Stack.Screen
         name="full-device"
         component={FullDevice}/>
+        <Stack.Screen name="bluetooth"
+        component={BlueTooth}/>
         
       </Stack.Navigator>
     </NavigationContainer>

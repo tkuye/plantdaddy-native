@@ -63,14 +63,14 @@ const Devices =  (props:any) => {
 			<Text style={styles.deviceText}>
 				My Devices
 			</Text>
-			{!devices ? <Text style={styles.noDevices}>You don't have any devices yet. Press the button to add one now!</Text>: null}
 			<FlatList
 			data={data}
+			ListEmptyComponent={emptyComponent}
 			renderItem={renderItem}
 			keyExtractor={(_, index) => index.toString()}
 			onRefresh={() => fetchData()}
 			refreshing={refreshing}/>
-			<TouchableOpacity style={styles.deviceTouch} onPress={() => props.navigation.navigate("new-device")} > 
+			<TouchableOpacity style={styles.deviceTouch} onPress={() => props.navigation.navigate("bluetooth")} > 
 				<Image source={require('../assets/icons/plus_button.png')} style={styles.plusButton}/>
 			</TouchableOpacity>
 			<View style={styles.logout}>
@@ -80,5 +80,11 @@ const Devices =  (props:any) => {
 		</SafeAreaView>
 	)
 }	
+
+const emptyComponent = () => {
+	return (
+		<Text style={styles.noDevices}>You don't have any devices yet. Press the button to add one now!</Text>
+	)
+}
 
 export default Devices

@@ -55,3 +55,15 @@ export function formatDate(date: Date) {
   var strTime = hours + ':' + minutes + ' ' + ampm;
   return (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
 }
+
+
+export const SERVICE_UUID: string = "5F7937B4-039F-11EC-9A03-0242AC130003"
+
+export const toBytes = (str: string) => {
+  var arr = [];
+  var utf8 = unescape(encodeURIComponent(str));
+  for (var i = 0; i < utf8.length; i++) {
+    arr.push(utf8.charCodeAt(i));
+  }
+  return arr;
+}
