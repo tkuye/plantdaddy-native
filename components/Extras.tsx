@@ -67,3 +67,13 @@ export const toBytes = (str: string) => {
   }
   return arr;
 }
+
+export async function removeItemValue(key:string) {
+  try {
+      await AsyncStorage.removeItem(key);
+      return true;
+  }
+  catch(exception) {
+      return false;
+  }
+}

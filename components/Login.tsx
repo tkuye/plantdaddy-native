@@ -26,13 +26,16 @@ const Login = (props: any) => {
 	const sendData = () => {
 
 		axios.post("/login", {
+			
 			username: username.toLowerCase(),
 			password: password
 		}).then(response => {
 			if (response.status === 200) {
-				storeData("username", username)
-				storeData("password", password)
-				props.navigation.navigate("devices")
+				Promise.all([storeData("username", username),
+				storeData("password", password)]).then(() => {
+					props.navigation.navigate("devices")
+				})
+				
 			}
 		}).catch(error => {
 			setError("Username does not exist or password is incorrect.")

@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 import {Text, TouchableNativeFeedback, TouchableOpacity, Image, FlatList, Button, View, ListRenderItem} from 'react-native';
 import { styles } from './Styles';
 import axios from './Axios';
-import { getData, storeData} from './Extras';
+import { getData, storeData, removeItemValue} from './Extras';
 import Device from "./Device"
 import { SafeAreaView } from 'react-native-safe-area-context';
 /**
@@ -50,10 +50,14 @@ const Devices =  (props:any) => {
 	
 
 
-	const logOut = () => {
-		storeData("username", null)
-		storeData("password", null)
-		props.navigation.navigate("login")
+	const logOut = async () => {
+		const user_bool = await removeItemValue("username")
+		const pass_bool = await removeItemValue("password")
+
+		if (user_bool && pass_bool) {
+			props.navigation.navigate("login")
+		}	
+		
 	}
 
 	const renderItem:ListRenderItem<any> = ({item}) => (

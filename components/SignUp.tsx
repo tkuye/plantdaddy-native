@@ -67,8 +67,8 @@ const [error, setError] = useState("")
 		}
 		
 		axios.post("/new-user", {
-			username: username.toLowerCase(),
-			password: password,
+			username: username.toLowerCase().trim(),
+			password: password.trim(),
 			email: email.toLowerCase(),
 		}).then((response:any )=> {
 			if (response.status === 200) {
@@ -80,9 +80,11 @@ const [error, setError] = useState("")
 					return
 				}
 				
-				storeData("username", username)
-				storeData("password", password)
-				props.navigation.navigate("devices")
+				Promise.all([storeData("username", username),
+				storeData("password", password)]).then(() => {
+					props.navigation.navigate("devices")
+				})
+				
 
 			} 
 		}).catch(error => {

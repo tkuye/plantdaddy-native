@@ -43,6 +43,7 @@ const NewDevice: React.FC<NewDeviceProps> = (props) => {
 
 const sendData = () => {
 	getData("username").then((d) => {
+		console.log("USERNAME: "+ d)
 		axios.post("/new-device",{
 		deviceName: name,
 		deviceId: peripheralData?.peripheral.advertising.localName,

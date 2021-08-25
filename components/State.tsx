@@ -20,8 +20,9 @@ const State: React.FC<StateProps> = ({navigation}) => {
 
 	useEffect(() => {
 		const dataFetch = async () => {
-		let username = await getData("username") as string
-		let password = await getData("password") as string
+		let username = await getData("username")
+		let password = await getData("password")
+		console.log(username, password)
 		if (username !== null && password !== null) {
 			
 			axios.post("/login", {
